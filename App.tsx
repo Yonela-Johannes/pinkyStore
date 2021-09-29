@@ -1,21 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import Amplify from 'aws-amplify';
+import config from './src/aws-exports'
+import StackRouter from './Navigation/StackRouter'
+import StackNavigator from './SignIn/StackNavigator';
+import { StyleSheet } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { withAuthenticator } from 'aws-amplify-react-native'
+Amplify.configure(config);
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const App = () => {
+  return(
+    <StackRouter />
+      // <StackNavigator />
+  )
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });
+export default withAuthenticator(App)
+// export default App

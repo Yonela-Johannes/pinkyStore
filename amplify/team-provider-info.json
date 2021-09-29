@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pinkystore-dev-02717-authRole",
+      "UnauthRoleArn": "arn:aws:iam::235812810512:role/amplify-pinkystore-dev-02717-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::235812810512:role/amplify-pinkystore-dev-02717-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-pinkystore-dev-02717-deployment",
+      "UnauthRoleName": "amplify-pinkystore-dev-02717-unauthRole",
+      "StackName": "amplify-pinkystore-dev-02717",
+      "StackId": "arn:aws:cloudformation:us-east-2:235812810512:stack/amplify-pinkystore-dev-02717/42b374b0-1bf4-11ec-9d61-0aced2a69edc",
+      "AmplifyAppId": "d258sjrjgie36o"
+    },
+    "categories": {
+      "auth": {
+        "pinkystore08f8704d": {}
+      }
+    }
+  }
+}
