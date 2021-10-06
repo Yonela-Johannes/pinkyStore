@@ -12,8 +12,8 @@ Amplify.configure(config);
 const App = () => {
   return(
     // <VerificationScreen />
-    // <StackRouter />
-      <StackNavigator />
+    <StackRouter />
+      // <StackNavigator />
   )
 }
 const styles = StyleSheet.create({

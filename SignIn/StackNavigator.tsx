@@ -40,7 +40,7 @@ const StackNavigator = () => {
        }
     return (
         <NavigationContainer>
-          <Stack.Navigator initialRouteName={!!Auth.user}
+          <Stack.Navigator
           screenOptions={headerScreen} 
           >
             <Stack.Screen name="bottomTabNavigator" component={BottomTabNavigator}/>

@@ -12,10 +12,12 @@ import NewPost from '../Components/NewPost/NewPost';
 import { AntDesign } from '@expo/vector-icons';
 import { StyleSheet, Image, Text, View, TouchableOpacity, Platform} from 'react-native';
 import { getUser } from '../src/graphql/queries'
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
 import Product from '../Components/Product/Product';
 import { API, graphqlOperation } from 'aws-amplify'
+
 const Stack = createNativeStackNavigator();
 Amplify.configure(config);
 
@@ -74,7 +76,7 @@ const StackRouter = () => {
 
   const [searchValue, setSearchValue] = useState('')
   return(
-    // <NavigationContainer>
+    <NavigationContainer>
       <Stack.Navigator  
       screenOptions={headerScreen}
       >
@@ -87,7 +89,7 @@ const StackRouter = () => {
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="NewPost" component={NewPost} />
       </Stack.Navigator>
-    // </NavigationContainer>
+     </NavigationContainer>
   )
 }
 const styles = StyleSheet.create({

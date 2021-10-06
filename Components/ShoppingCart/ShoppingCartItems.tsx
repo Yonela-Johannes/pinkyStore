@@ -8,28 +8,7 @@ import { CartProduct } from '../../src/models';
 
 
 interface CartProductItemsProps {
-    // cartItems: CartProduct;
-    cartItem: {
-        id: string;
-        quantity: number;
-        options?: string[];
-        product : {
-            id: string;
-            name: string;
-            image: string;
-            price: number;
-            rating: number;
-            love: number;
-            loveCount: number;
-            description: string;
-            avgRating: number;
-            oldPrice?: number;
-            averageRate: number;
-            images: string[];
-            options?: string[];
-        },
-
-    }
+    cartItems: CartProduct;
 }
 function ShoppingCartItems({cartItem}: CartProductItemsProps) {
     console.log("I am here.", cartItem)
@@ -79,19 +58,7 @@ function ShoppingCartItems({cartItem}: CartProductItemsProps) {
                                 </View>
                             </View>
                     </View>
-                    <View style={{marginBottom: 10, flexDirection: 'row', backgroundColor: '#f1f1f1', padding: 5, borderRadius: 5}}>
-                        {[0,0,0,0,0].map((el, i) =>
-                            <AntDesign
-                            key={`${product.id}-${i}`}
-                            name={i < Math.floor(product.love) ? 'heart': 'hearto'}
-                            size={12}
-                            color="pink"
-                            />
-                            )
-                        }
-                        <Text style={styles.loveCount}>{product.loveCount}</Text>                        
-                    </View>
-                        <QuantitySelector quantity={cartProduct.quantity} setQuantity={updateQuantity} />
+                    <QuantitySelector quantity={cartProduct.quantity} setQuantity={updateQuantity} />
                 </View>
             </View>
         </View>

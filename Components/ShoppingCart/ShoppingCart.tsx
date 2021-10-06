@@ -70,6 +70,7 @@ export default function ShoppingCartComponent() {
     (summedPrice, product) =>
      summedPrice + (product?.product?.price || 0) * product.quantity, 0);
   const navigation = useNavigation();
+  
   const onPress = () => {
       navigation.navigate('AddressScreen')
   }

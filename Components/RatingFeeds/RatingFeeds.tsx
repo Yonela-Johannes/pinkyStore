@@ -1,5 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import {FontAwesome, AntDesign } from '@expo/vector-icons';
+
+const product = {
+    love: 100,
+    loveCount: 500
+}
 
 export default function componentName() {
   return (
@@ -7,6 +13,18 @@ export default function componentName() {
         <View style={styles.textContainer}>
             <Text style={styles.post}>"I am ratings We up"</Text>
             <Text style={styles.name}> -Yonela Johannes</Text>
+            <View style={{marginBottom: 10, flexDirection: 'row', backgroundColor: '#f1f1f1', padding: 5, borderRadius: 5}}>
+                        {[0,0,0,0,0].map((el, i) =>
+                            <AntDesign
+                            key={`${product.id}-${i}`}
+                            name={i < Math.floor(product.love) ? 'heart': 'hearto'}
+                            size={12}
+                            color="pink"
+                            />
+                            )
+                        }
+                        <Text style={styles.loveCount}>{product.loveCount}</Text>                        
+                    </View>
         </View>
         <View style={styles.textContainer}>
             <Text style={styles.post}>"I am ratings We up"</Text>
@@ -31,6 +49,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10
 
+    },
+    loveCount :{
+        color: 'pink',
+        fontSize: 10,
+        paddingLeft: 5,
+        fontWeight: 'bold',
     },
     post:{
 

@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { DataStore } from 'aws-amplify'
 import { Product } from '../../src/models'
-import {View, Text, Image, Pressable} from 'react-native'
+import {View, Text, Image, Pressable, LogBox} from 'react-native'
 import {FontAwesome, AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
+
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 interface CategoriesProps {
     product: {
@@ -21,12 +24,12 @@ interface CategoriesProps {
     }
 }
 function Slider({product}: CategoriesProps) {
+
     const [Products , setProducts] = useState<Product[]>([]);
     const navigation = useNavigation();
     const onPress = () =>{
         navigation.navigate('ProductScreen', {id: product.id});
     }
-
     useEffect(() => {
         DataStore.query(Product).then(setProducts)
     }, [])
@@ -63,18 +66,7 @@ function Slider({product}: CategoriesProps) {
                                 </View>
                             </View>
                     </View>
-                    <View style={{marginBottom: 10, flexDirection: 'row', backgroundColor: '#f1f1f1', padding: 5, borderRadius: 5}}>
-                        {[0,0,0,0,0].map((el, i) =>
-                            <AntDesign
-                            key={`${product.id}-${i}`}
-                            name={i < Math.floor(product.love) ? 'heart': 'hearto'}
-                            size={12}
-                            color="pink"
-                            />
-                            )
-                        }
-                        <Text style={styles.loveCount}>{product.loveCount}</Text>                        
-                    </View>
+
                 </View>
             </View>
         </Pressable>

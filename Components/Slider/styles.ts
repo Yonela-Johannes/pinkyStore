@@ -44,12 +44,6 @@ import { StyleSheet } from 'react-native';
         fontSize: 10,
         paddingLeft: 5 
     },
-    loveCount :{
-        color: 'pink',
-        fontSize: 10,
-        paddingLeft: 5,
-        fontWeight: 'bold',
-    },
     contentDescription: {
         width: 180,
         fontSize: 12,

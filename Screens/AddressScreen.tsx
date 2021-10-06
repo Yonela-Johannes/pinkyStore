@@ -91,17 +91,17 @@ export default function AddressScreen({navigation}) {
             <Text style={styles.label}>Address</Text>
             <TextInput style={styles.input} placeholder={'Street address or P.O Box'} value={address} onChangeText={setAddress} />
             <TextInput style={styles.input} placeholder={'Apartment, Unit...(Optional)'} value={apartment} onChangeText={setApartment} />
-            {!!error && <Text style={styles.error}>{error}</Text>}
+            {/* {!!error && <Text style={styles.error}>{error}</Text>} */}
         </View>
         <View>
             <Text style={styles.label}>City</Text>
             <TextInput style={styles.input} value={city} onChangeText={setCity} />
         </View>
-        <View>
+        {/* <View>
             <Text style={styles.label}>ZIP Code</Text>
             <TextInput keyboardType={'phone-pad'} style={styles.input} value={zip} onChangeText={(text) => setZip(text)} />
             {!!error && <Text style={styles.error}>{error}</Text>}
-        </View>
+        </View> */}
         <View>
             <Text style={styles.delivery}>Delivery takes up to 2 weeks.</Text>
         </View>
