@@ -74,13 +74,6 @@ type Order @model @auth(rules: [{allow: public }]){
   city: String
   address: String
 }
-# type Order @model {
-#   id: ID;
-
-#   userSub: String!
-
-
-# }
 
 # type Feed @model {
 #   id: ID!
