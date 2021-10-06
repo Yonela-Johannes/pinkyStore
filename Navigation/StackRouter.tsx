@@ -4,16 +4,13 @@ import config from '../src/aws-exports'
 import {Auth} from 'aws-amplify'
 import SignupScreen from '../Screens/SignupScreen'
 import ServiceScreen from '../Screens/ServiceScreen';
-import { EvilIcons } from '@expo/vector-icons';
 import LoginScreen  from '../Screens/LoginScreen';
 import AddressScreen from '../Screens/AddressScreen';
 import ProfilePicture from '../Components/ProfilePicture/ProfilePicture'
 import ShoppingCart from '../Components/ShoppingCart/ShoppingCart';
 import NewPost from '../Components/NewPost/NewPost';
-import { Entypo, Ionicons, MaterialIcons, Feather, FontAwesome5, AntDesign } from '@expo/vector-icons';
-import { StyleSheet, Image, TextInput,Text, View,SafeAreaView, TouchableOpacity, Platform} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import Button from '../Components/Button/Button'
+import { AntDesign } from '@expo/vector-icons';
+import { StyleSheet, Image, Text, View, TouchableOpacity, Platform} from 'react-native';
 import { getUser } from '../src/graphql/queries'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
@@ -59,17 +56,14 @@ const StackRouter = () => {
           </View>
         </View>
       ),
+      headerLeft: () => null,
       headerRight: () => (
         <View>
-          <View style={styles.search}>
-            <EvilIcons style={styles.searchIcon} name="search" size={20} color="gray" />
-            <TextInput style={{paddingHorizontal: 10}} placeholder={'Search item....'} />
-          </View>
           <View style={styles.buttonContainer}>
             <View>
               <ProfilePicture  size={25} image={user?.image} />
             </View>
-            <TouchableOpacity activeOpacity={0.6} onPress={logOut} >
+            <TouchableOpacity activeOpacity={0.7} onPress={logOut} >
                 <AntDesign style={styles.logoutIcon} name="logout" size={18} color="gray" />
             </TouchableOpacity>
           </View>
@@ -80,8 +74,10 @@ const StackRouter = () => {
 
   const [searchValue, setSearchValue] = useState('')
   return(
-    <NavigationContainer>
-      <Stack.Navigator  screenOptions={headerScreen}>
+    // <NavigationContainer>
+      <Stack.Navigator  
+      screenOptions={headerScreen}
+      >
         <Stack.Screen name="bottomTabNavigator" component={BottomTabNavigator}/>
         <Stack.Screen name="Service" component={ServiceScreen} />
         <Stack.Screen name="AddressScreen" component={AddressScreen} />
@@ -91,7 +87,7 @@ const StackRouter = () => {
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="NewPost" component={NewPost} />
       </Stack.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   )
 }
 const styles = StyleSheet.create({
@@ -129,7 +125,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink'
   },
   logoutIcon: {
-    margin: 5,
+    marginLeft: 30,
+    padding: 5,
     backgroundColor: 'pink'
   },
   container: {
@@ -165,5 +162,4 @@ buttonContainer: {
   flexDirection: 'row'
 }
 });
-// export default withAuthenticator(App)
 export default StackRouter

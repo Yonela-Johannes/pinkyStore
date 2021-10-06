@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Amplify, { Auth, API, graphqlOperation} from 'aws-amplify';
 import { S3Image } from 'aws-amplify-react-native'
-import Moment from 'react-moment';
-import { View, Text, Image, Pressable, TouchableOpacity } from 'react-native';
-import  feed  from '../../data/feed'
+import { View, Text, Image } from 'react-native';
 import styles from './styles'
-import REactFooter from './ReactFooter'
 import { getUser } from '../../src/graphql/queries'
 import { createUser } from '../../src/graphql/mutations'
-import ReactFooter from './ReactFooter';
 import moment from 'moment';
 
 interface PostProps{
@@ -25,10 +21,7 @@ interface PostProps{
                 imageUri: string;
                 Video: string;
             },
-            love: number;
-            like: number;
-            comment: number;
-            share: number;
+
     }
 }
 const Post = (props: PostProps) => {
@@ -71,16 +64,15 @@ const Post = (props: PostProps) => {
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Image style={styles.userImage} source={{uri: feed.user.image}}/>
                 <Text style={styles.name}>{feed.user.name}</Text>
-                <Text style={styles.username}>{feed.user.username}</Text>
+                <Text style={styles.username}>{feed.user.email}</Text>
             </View>
             <Text style={styles.headerTitle}>{feed.title}</Text>
             <Text style={{fontSize: 10, color:'gray'}}>{moment(feed.createdAt).fromNow()}</Text>
         </View>
         <View style={styles.postContainer}>
-            {!!feed.image && <S3Image style={styles.postImage} imgKey={{uri: feed?.image}}/>}
+            {!!feed.image && <S3Image style={styles.postImage} imgKey={{uri: feed.user.image}}/>}
             <Text style={styles.postText}>{feed.content}</Text>
         </View>
-        {/* <ReactFooter /> */}
     </View>
   );
 }

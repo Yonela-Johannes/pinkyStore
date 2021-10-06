@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import {View, Text, TouchableOpacity, Image, TouchableHighlight} from 'react-native'
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'
+import { DataStore } from 'aws-amplify';
 import QuantitySelector from '../QuantitySelecctor/QuantitySelector'
 import styles from './styles'
+import { CartProduct } from '../../src/models';
 
 
 interface CartProductItemsProps {
+    // cartItems: CartProduct;
     cartItem: {
         id: string;
         quantity: number;
@@ -31,9 +33,17 @@ interface CartProductItemsProps {
 }
 function ShoppingCartItems({cartItem}: CartProductItemsProps) {
     console.log("I am here.", cartItem)
-    const {quantity: quantityProp, product} = cartItem
-    const [quantity, setQuantity] = useState(quantityProp)
+    const {product, ...cartProduct} = cartItem;
 
+
+    const updateQuantity = async (newQuantity: number) => {
+        const original = await DataStore.query(CartProduct, cartProduct.id);
+        await DataStore.save(
+            CartProduct.CopyOf(original, updated => {
+                updated.quatity = newQuantity;
+            })
+        )
+    }
     return (
         <View style={styles.slider}>
             <View style={styles.mainContentContainer}>
@@ -81,7 +91,7 @@ function ShoppingCartItems({cartItem}: CartProductItemsProps) {
                         }
                         <Text style={styles.loveCount}>{product.loveCount}</Text>                        
                     </View>
-                        <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+                        <QuantitySelector quantity={cartProduct.quantity} setQuantity={updateQuantity} />
                 </View>
             </View>
         </View>

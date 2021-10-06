@@ -1,49 +1,56 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
-import {Picker} from '@react-native-picker/picker'
-import countryList from 'country-list'
+import { View, Text, TextInput, StyleSheet, Alert, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Button from '../Components/Button/Button'
-const countries = countryList.getData();
+import { DataStore, Auth } from 'aws-amplify';
+import {Order, OrderProduct, CartProduct} from '../src/models'
 
 
-
-export default function AddressScreen() {
-    const [country, setCountry] = useState(countries[246].code)
+export default function AddressScreen({navigation}) {
     const [fullname, setFullname] = useState('')
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
     const [apartment, setApartment] = useState('')
     const [city, setCity] = useState('')
-    const [zip, setZip] = useState('')
-    
-    const [error, setError] = useState('')
+
     const [phoneError, setPhoneError] = useState('')
     // const [zipError, zipError] = useState('')
 
     const validatePhone = () =>{
         if (phone.length < 9){
             setPhoneError('Phone number too short')
-        }else if(phone.length > 9){
+        }else if(phone.length > 10){
             setPhoneError('Phone number exceeded limit')
         };
     }
-    const validateZip = () =>{
-        if (zip.length < 3){
-            zipError('ZIP code must be 4 digits')
-        }else{
-            zipError('ZIP code must be 4 digits')
-        };
-    }
-    const validateAddress = () => {
-        if (zip.length < 3){
-            addressError('ZIP code must be 4 digits')
-        }else{
-            addressError('ZIP code must be 4 digits')
-        };
-        
-    }
-    const onPress = () => {
 
+    // const saveOrder = async () => {
+    //     const userData = await Auth.currentAuthenticatedUser();
+    //     const newOrder = await DataStore.save(
+    //         new Order({
+    //             userSub: userData.attributes.sub,
+    //             fullname: fullname,
+    //             phoneNumber: phone,
+    //             city,
+    //             address,
+    //         })
+    //     )
+    //     const cartItems = await DataStore.query(CartProduct, cp => 
+    //         cp.userSub('eq', userData.attributes.sub),
+    
+    //     );
+    //     await Promise.all(
+    //         cartItems.map(cartItem => DataStore.save(new OrderProduct({
+    //             quantity: cartItem.quantity,
+    //             option: cartItem.option,
+    //             productID: cartItem.productID,
+    //             orderID: newOrder.id,
+    //         })))
+    //     )
+    //     await Promise.all(cartItems.map(cartItem => DataStore.delete(cartItem)));
+    //  };
+    console.log("before button click")
+    const checkOut = () => {
+        console.log("Before nav")
         if(!fullname)
             Alert.alert('Please fill in your fullname')
         else if(!phone)
@@ -54,18 +61,21 @@ export default function AddressScreen() {
             Alert.alert('Please fill in your city')
         else if(!zip)
             Alert.alert('Please fill in your ZIP code')
-        return;
+        else{
+            navigation.navigate('Blog')
+             console.log('After Navigation')
+        }
+            return;
     }
+
+
+    
 
   return (
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={10}>         
         <ScrollView style={styles.root}>
         <View>
-            <Picker selectedValue={country} onValueChange={setCountry}>
-                {countries.map(country => (
-                    <Picker.Item value={country.code} label={country.name}/>
-                ))}
-            </Picker>
+            <Text>South Africa</Text>
         </View>
         <View>
             <Text style={styles.label}>Fullname (Name & Surname)</Text>
@@ -95,9 +105,9 @@ export default function AddressScreen() {
         <View>
             <Text style={styles.delivery}>Delivery takes up to 2 weeks.</Text>
         </View>
-        <View>
-            <Button text={'Checkout'} onPress={onPress} />
-        </View>
+        <TouchableOpacity>
+            <Button text={'Checkout'} onPress={checkOut} />
+        </TouchableOpacity>
      </ScrollView>
      </KeyboardAvoidingView>
   );

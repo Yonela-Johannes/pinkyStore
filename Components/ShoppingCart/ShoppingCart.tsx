@@ -38,19 +38,40 @@ export default function ShoppingCartComponent() {
         setCartProducts(currentCartProducts =>
            cartProducts.map(cartProduct => ({
           ...cartProduct,
-           product: products.find(p => p.id !== cartProduct.productID),
+           product: products.find(p => p.id === cartProduct.productID),
         }))
         );
       };
       fetchProducts();
   }, [cartProducts])
 
+    useEffect(() => {
+      const subscriptions = cartProducts.map(cp => 
+       DataStore.observe(CartProduct, cp.id).subscribe(msg => {
+         if(msg.opType === 'UPDATE'){
+           setCartProducts(curCartProducts => curCartProducts.map(cp => {
+             if(cp.id !== msg.element.id){
+               return cp;
+             }
+             return {
+               ...cp,
+               ...msg.element,
+             }
+           }))
+         }
+      }),
+    );
+      return () => {
+        subscriptions.forEach(sub => sub.unsubscribe());
+      }
+    }, [cartProducts])
+
   const totalPrice = cartProducts.reduce(
     (summedPrice, product) =>
      summedPrice + (product?.product?.price || 0) * product.quantity, 0);
   const navigation = useNavigation();
   const onPress = () => {
-      // navigation.navigate('AddressScreen')
+      navigation.navigate('AddressScreen')
   }
   if (cartProducts.filter(cp => !cp.product).length !== 0){
     return <ActivityIndicator />

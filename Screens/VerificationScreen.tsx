@@ -1,54 +1,34 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, ScrollView, KeyboardAvoidingView, Platform, Pressable, TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import Button from '../Components/Button/Button'
 import { Auth } from 'aws-amplify';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-Auth.currentAuthenticatedUser({
-    bypassCache: true  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-}).then(user => console.log(user))
-.catch(err => console.log(err));
 
-export default function LoginScreen({navigation}) {
-    const [password, setPassword] = useState('')
+export default function VerificationScreen({navigation}) {
     const [username, setUsername] = useState('')
-    const [usernameError, setUsernameError] = useState('')
-    const [passwordError, setPasswordError] = useState('')
+    const [code, setCode] = useState('')
 
-    const signIn = async () => {
-        if(!username)
-            Alert.alert('Please fill in your user email')
-        else if(!password)
-            Alert.alert('Please fill in your password') 
-            else{
-                try{
-                    const { user } = await Auth.signIn({
-                        username,
-                        password,
-                    });
-                    navigation.replace('MainScreen')
-                } catch(error) {
-                    console.log('error signin up', error)
-                    Alert.alert('OOPS!', 'Incorrect password or email address', [{text: 'Understood'}])
-                    Auth.currentAuthenticatedUser ? navigation.replace('Signup') : navigation.replace('MainScren')
-                }
+      
+        const register = async () => {
+            try{
+                const { user } = await Auth.confirmSignUp(username, code)
+                navigation.navigate('Login')                
+            }catch (e) {
+                console.log("Error confirming signup", e)
             }
         }
-        const validatePhone = () =>{
-            if (username.length < 3){
-                setUsernameError('Email too short')
-            }else if(!username){
-                setUsernameError('Enter your email address')
+        
+    const onPress = () => {
+
+        }
+        const resendCode = async () => {
+            try{
+                await Auth.resendSignUp(username)
+                console.log("code resent successfully")
+            }catch(error) {
+                console.log("Error resend code", error)
             }
-            else if(password.length < 8){
-                setPasswordError('You password should be 8 characters or more!')
-            };
-        }
-        const register = () => {
-            navigation.navigate('Signup')
-        }
-        const getPassword = () => {
-            navigation.navigate('GetPassword')
         }
 
   return (
@@ -57,32 +37,30 @@ export default function LoginScreen({navigation}) {
             <ScrollView style={styles.root}>
                 <View style={styles.inputContainer}>
                     <View>
-                        <Text style={styles.label}>Username</Text>
-                        <TextInput style={styles.input} onEndEditing={validatePhone} placeholder={'jane'} value={username} onChangeText={text => {setUsername(text); setUsernameError('')}} />
-                        {!!usernameError && <Text style={styles.error}>{usernameError}</Text>}                
+                        <Text style={styles.label}>Email</Text>
+                        <TextInput style={styles.input} placeholder={'janedoe@gmail.com'} value={username} onChangeText={setUsername} />
                     </View>
                     <View>
-                        <Text style={styles.label}>Password</Text>
-                        <TextInput style={styles.input} onEndEditing={validatePhone} placeholder={"password"} textContentType="password" autoCapitalize='none' secureTextEntry value={password} onChangeText={text => {setPassword(text); setPasswordError('')}} />
-                        {!!passwordError && <Text style={styles.error}>{passwordError}</Text>}   
+                        <Text style={styles.label}>Verification code</Text>
+                        <TextInput style={styles.input} placeholder={"Authentication code"} autoCapitalize='none' secureTextEntry value={code} onChangeText={setCode} />
                     </View>
                 </View>
                 <View style={styles.buttons} >
                     <View style={styles.buttonsContainer}>
                         <View style={{flexDirection: 'row', alignItems: 'center', paddingBottom: 8}}>
-                            <Text style={{color: 'gray'}}>forgot password?</Text>
+                            <Text style={{color: 'gray'}}>Check your email for code.</Text>
                             <View>
-                                <Text onPress={getPassword} style={{borderRadius: 5, borderWidth: 1, marginHorizontal: 8, borderColor: 'pink', color: 'purple', fontSize: 12, paddingHorizontal: 10, paddingVertical: 5}}>Get Password</Text>
+                                {/* <Text style={{color: 'purple', fontSize: 12, paddingHorizontal: 10}}>Get Password</Text> */}
                             </View>
                         </View>
-                        <TouchableOpacity activeOpacity={0.7}>
-                            <Button text={'Sign in'} onPress={signIn} />
+                        <TouchableOpacity>
+                            <Button text={'confirm sign Up'} onPress={register} />
                         </TouchableOpacity>
                         <View>
                             <Text style={{color: 'gray', paddingBottom: 8 }}>Register if you do not have an account.</Text>
                         </View>
-                        <TouchableOpacity activeOpacity={0.7}>
-                            <Button text={'Register'} onPress={register} containerStyles={{backgroundColor: 'white'}} />
+                        <TouchableOpacity>
+                            <Button text={'Send again'} onPress={resendCode} containerStyles={{backgroundColor: 'white'}} />
                         </TouchableOpacity>
                     </View>
                 </View>

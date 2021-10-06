@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import { View, Text, TouchableOpacity,StyleSheet, TextInput, Platform, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { v4 as uuidv4 } from 'uuid';
+import 'react-native-get-random-values'
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Amplify, { Auth, API, graphqlOperation, Storage} from 'aws-amplify';
 import { createPost } from '../../src/graphql/mutations'
-export default function NewPost() {
+// import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid'
 
+console.log(uuid())
+
+export default function NewPost() {
     const [post, setPost] = useState("")
     const [image, setImage] = useState(null)
     const navigation = useNavigation();
-    const getPermission = async () => {
-        
-    }
 
     useEffect(() => {
         (async () => {
@@ -47,14 +48,15 @@ export default function NewPost() {
             const blob = await response.blob();
             const urlParts = image.split('.')
             const extension = urlParts[urlParts.length - 1];
-            const key = `${uuidv4()}.${extension}`;
+            console.log("extension", extension);
+            const key = `${uuid()}.${extension}`;
             await Storage.put(key, blob);
-            
-           return key;
-
+            console.log('This is the key', key)
+            return key;
           }catch(e){
-              
+              console.log(e)
           }
+          return;
       }
 
     const onPostPost = async () => {
@@ -62,11 +64,9 @@ export default function NewPost() {
       if(!!image){
         pic = await uploadImage();
       }
-      console.log(pic)
-      return;
       try{
           const currentUser = await Auth.currentAuthenticatedUser({ bypassCache: true});
-          const newPost ={
+          const newPost = {
               content: post,
               image: image,
               userID: currentUser.attributes.sub,
@@ -74,7 +74,7 @@ export default function NewPost() {
           await API.graphql(graphqlOperation(createPost, { input: newPost }))
           navigation.goBack();
       } catch (e){
-          console.log(e)
+          console.log('Check this error',e)
       }
 
     }

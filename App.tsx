@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import VerificationScreen from './Screens/VerificationScreen';
 import Amplify from 'aws-amplify';
 import config from './src/aws-exports'
 import StackRouter from './Navigation/StackRouter'
@@ -10,12 +11,13 @@ Amplify.configure(config);
 
 const App = () => {
   return(
-    <StackRouter />
-      // <StackNavigator />
+    // <VerificationScreen />
+    // <StackRouter />
+      <StackNavigator />
   )
 }
 const styles = StyleSheet.create({
 
 });
-export default withAuthenticator(App)
-// export default App
+// export default withAuthenticator(App)
+export default App
