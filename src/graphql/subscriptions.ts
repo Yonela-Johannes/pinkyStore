@@ -182,6 +182,54 @@ export const onDeletePost = /* GraphQL */ `
     }
   }
 `;
+export const onCreateRating = /* GraphQL */ `
+  subscription OnCreateRating {
+    onCreateRating {
+      id
+      name
+      content
+      avgRating
+      rating
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRating = /* GraphQL */ `
+  subscription OnUpdateRating {
+    onUpdateRating {
+      id
+      name
+      content
+      avgRating
+      rating
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRating = /* GraphQL */ `
+  subscription OnDeleteRating {
+    onDeleteRating {
+      id
+      name
+      content
+      avgRating
+      rating
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateProduct = /* GraphQL */ `
   subscription OnCreateProduct {
     onCreateProduct {

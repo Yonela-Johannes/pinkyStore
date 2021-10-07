@@ -196,6 +196,76 @@ export const syncPosts = /* GraphQL */ `
     }
   }
 `;
+export const getRating = /* GraphQL */ `
+  query GetRating($id: ID!) {
+    getRating(id: $id) {
+      id
+      name
+      content
+      avgRating
+      rating
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listRatings = /* GraphQL */ `
+  query ListRatings(
+    $filter: ModelRatingFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRatings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        content
+        avgRating
+        rating
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncRatings = /* GraphQL */ `
+  query SyncRatings(
+    $filter: ModelRatingFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncRatings(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        content
+        avgRating
+        rating
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {

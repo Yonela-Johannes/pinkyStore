@@ -153,6 +153,77 @@ export type DeletePostInput = {
   _version?: number | null,
 };
 
+export type CreateRatingInput = {
+  id?: string | null,
+  name?: string | null,
+  content: string,
+  avgRating?: number | null,
+  rating?: number | null,
+  _version?: number | null,
+};
+
+export type ModelRatingConditionInput = {
+  name?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  avgRating?: ModelFloatInput | null,
+  rating?: ModelIntInput | null,
+  and?: Array< ModelRatingConditionInput | null > | null,
+  or?: Array< ModelRatingConditionInput | null > | null,
+  not?: ModelRatingConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Rating = {
+  __typename: "Rating",
+  id: string,
+  name?: string | null,
+  content: string,
+  avgRating?: number | null,
+  rating?: number | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateRatingInput = {
+  id: string,
+  name?: string | null,
+  content?: string | null,
+  avgRating?: number | null,
+  rating?: number | null,
+  _version?: number | null,
+};
+
+export type DeleteRatingInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreateProductInput = {
   id?: string | null,
   name: string,
@@ -180,30 +251,6 @@ export type ModelProductConditionInput = {
   and?: Array< ModelProductConditionInput | null > | null,
   or?: Array< ModelProductConditionInput | null > | null,
   not?: ModelProductConditionInput | null,
-};
-
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
 };
 
 export type Product = {
@@ -413,6 +460,24 @@ export type ModelPostFilterInput = {
   and?: Array< ModelPostFilterInput | null > | null,
   or?: Array< ModelPostFilterInput | null > | null,
   not?: ModelPostFilterInput | null,
+};
+
+export type ModelRatingFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  avgRating?: ModelFloatInput | null,
+  rating?: ModelIntInput | null,
+  and?: Array< ModelRatingFilterInput | null > | null,
+  or?: Array< ModelRatingFilterInput | null > | null,
+  not?: ModelRatingFilterInput | null,
+};
+
+export type ModelRatingConnection = {
+  __typename: "ModelRatingConnection",
+  items?:  Array<Rating | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelProductFilterInput = {
@@ -711,6 +776,69 @@ export type DeletePostMutation = {
         startedAt?: number | null,
       } | null,
     } | null,
+  } | null,
+};
+
+export type CreateRatingMutationVariables = {
+  input: CreateRatingInput,
+  condition?: ModelRatingConditionInput | null,
+};
+
+export type CreateRatingMutation = {
+  createRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateRatingMutationVariables = {
+  input: UpdateRatingInput,
+  condition?: ModelRatingConditionInput | null,
+};
+
+export type UpdateRatingMutation = {
+  updateRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteRatingMutationVariables = {
+  input: DeleteRatingInput,
+  condition?: ModelRatingConditionInput | null,
+};
+
+export type DeleteRatingMutation = {
+  deleteRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1340,6 +1468,81 @@ export type SyncPostsQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetRatingQueryVariables = {
+  id: string,
+};
+
+export type GetRatingQuery = {
+  getRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListRatingsQueryVariables = {
+  filter?: ModelRatingFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListRatingsQuery = {
+  listRatings?:  {
+    __typename: "ModelRatingConnection",
+    items?:  Array< {
+      __typename: "Rating",
+      id: string,
+      name?: string | null,
+      content: string,
+      avgRating?: number | null,
+      rating?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncRatingsQueryVariables = {
+  filter?: ModelRatingFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncRatingsQuery = {
+  syncRatings?:  {
+    __typename: "ModelRatingConnection",
+    items?:  Array< {
+      __typename: "Rating",
+      id: string,
+      name?: string | null,
+      content: string,
+      avgRating?: number | null,
+      rating?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -2003,6 +2206,54 @@ export type OnDeletePostSubscription = {
         startedAt?: number | null,
       } | null,
     } | null,
+  } | null,
+};
+
+export type OnCreateRatingSubscription = {
+  onCreateRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateRatingSubscription = {
+  onUpdateRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteRatingSubscription = {
+  onDeleteRating?:  {
+    __typename: "Rating",
+    id: string,
+    name?: string | null,
+    content: string,
+    avgRating?: number | null,
+    rating?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 

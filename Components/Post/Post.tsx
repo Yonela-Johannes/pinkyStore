@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Amplify, { Auth, API, graphqlOperation} from 'aws-amplify';
+import { Auth, API, graphqlOperation} from 'aws-amplify';
 import { S3Image } from 'aws-amplify-react-native'
 import { View, Text, Image } from 'react-native';
 import styles from './styles'
@@ -44,7 +44,6 @@ const Post = (props: PostProps) => {
                 const user = {
                     id: userInfo.attributes.sub,
                     username: userInfo.username,
-                    name: userInfo.username,
                     email: userInfo.attributes.email,
                     image:  getRandomImage(),
                 }
@@ -61,16 +60,16 @@ const Post = (props: PostProps) => {
   return (
     <View style={styles.rootContainer}>
         <View style={styles.postHeaderContainer}>
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image style={styles.userImage} source={{uri: feed.user.image}}/>
-                <Text style={styles.name}>{feed.user.name}</Text>
-                <Text style={styles.username}>{feed.user.email}</Text>
+            <View style={styles.userDetailsContainer}>
+                <Text style={styles.username}>{feed.username ? 'feed.username' : 'Visitor'}</Text>
+                <Image style={styles.userImage} source={require('../../img/logopinky.png')}/>
+                <Text style={styles.email}>{feed.email ? 'feed.email' : '@VisitorBePleasuredByPinky'}</Text>
             </View>
             <Text style={styles.headerTitle}>{feed.title}</Text>
             <Text style={{fontSize: 10, color:'gray'}}>{moment(feed.createdAt).fromNow()}</Text>
         </View>
         <View style={styles.postContainer}>
-            {!!feed.image && <S3Image style={styles.postImage} imgKey={{uri: feed.user.image}}/>}
+            {!!feed.image && <S3Image style={styles.postImage} imgKey={{uri: feed.image}}/>}
             <Text style={styles.postText}>{feed.content}</Text>
         </View>
     </View>

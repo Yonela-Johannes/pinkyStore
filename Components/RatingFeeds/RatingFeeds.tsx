@@ -7,28 +7,33 @@ const product = {
     loveCount: 500
 }
 
-export default function componentName() {
+interface ratingCommentProps {
+    name: string;
+    content: string;
+    avgRating: number;
+    rating: number;
+}
+
+export default function RatingFeeds({post}) {
+    console.log(post)
+
   return (
       <View style={styles.container}>
         <View style={styles.textContainer}>
-            <Text style={styles.post}>"I am ratings We up"</Text>
-            <Text style={styles.name}> -Yonela Johannes</Text>
+            <Text style={styles.post}>{post.content}</Text>
+            <Text style={styles.name}>{post?.name}</Text>
             <View style={{marginBottom: 10, flexDirection: 'row', backgroundColor: '#f1f1f1', padding: 5, borderRadius: 5}}>
                         {[0,0,0,0,0].map((el, i) =>
                             <AntDesign
                             key={`${product.id}-${i}`}
-                            name={i < Math.floor(product.love) ? 'heart': 'hearto'}
+                            name={i < Math.floor(post.avgRating) ? 'heart': 'hearto'}
                             size={12}
                             color="pink"
                             />
                             )
                         }
-                        <Text style={styles.loveCount}>{product.loveCount}</Text>                        
+                        <Text style={styles.loveCount}>{post.rating}</Text>                        
                     </View>
-        </View>
-        <View style={styles.textContainer}>
-            <Text style={styles.post}>"I am ratings We up"</Text>
-            <Text style={styles.name}> -Yonela Johannes</Text>
         </View>
       </View>
   );

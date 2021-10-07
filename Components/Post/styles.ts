@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    userDetailsContainer: {
+        alignItems: 'flex-start',
+    },
     name:{
         fontSize: 14,
         color: 'black',
@@ -18,6 +21,10 @@ const styles = StyleSheet.create({
         fontSize: 11,
         color: 'gray',
         fontWeight: 'bold'
+    },
+    email:{
+        fontSize: 9,
+        color: 'gray',
     },
     headerTitle: {
         fontSize: 13,

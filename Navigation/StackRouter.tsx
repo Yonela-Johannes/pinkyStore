@@ -17,7 +17,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTabNavigator from '../Navigation/BottomTabNavigator';
 import Product from '../Components/Product/Product';
 import { API, graphqlOperation } from 'aws-amplify'
-
+import FeedScreen from '../Screens/FeedScreen'
 const Stack = createNativeStackNavigator();
 Amplify.configure(config);
 
@@ -84,6 +84,7 @@ const StackRouter = () => {
         <Stack.Screen name="Service" component={ServiceScreen} />
         <Stack.Screen name="AddressScreen" component={AddressScreen} />
         <Stack.Screen name="ProductScreen" component={Product} />
+        <Stack.Screen name="Feeds" component={FeedScreen} />
         <Stack.Screen name="ShoppingCart" component={ShoppingCart} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />

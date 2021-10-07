@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { View, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, FlatList, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import Post from '../Components/Post/Post'
 import { useNavigation } from '@react-navigation/native';
@@ -14,8 +14,6 @@ export default function FeedScreen() {
 
       const fetchFeeds = async () => {
         const postsData = await API.graphql(graphqlOperation(listPosts));
-
-        console.log(postsData)
         setLoading(true)
         try{
           const postsData = await API.graphql(graphqlOperation(listPosts));
@@ -34,11 +32,14 @@ export default function FeedScreen() {
   const createPostButton = () =>{
     navigation.navigate('NewPost')
 }
+
+console.log(feeds)
   return (
-    <View>
+    <View style={styles.container}>
         <TouchableOpacity style={styles.newPost} activeOpacity={0.8} onPress={createPostButton}>
             <Feather name="edit" size={24} color="white" />
         </TouchableOpacity>
+
       <FlatList 
       data={feeds}
       renderItem={({ item }) => <Post feed={item} />}
@@ -51,11 +52,14 @@ export default function FeedScreen() {
 }
 
 const styles = StyleSheet.create({
-
+  container: {
+    flexDirection: 'column',
+    flex: 1,
+  },
   newPost: {
     position: 'absolute',
     right: 18,
-    bottom: 15,
+    bottom: 35,
     backgroundColor: 'pink',
     borderRadius: 50,
     padding: 5,

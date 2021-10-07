@@ -12,6 +12,10 @@ type PostMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type RatingMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type ProductMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -49,6 +53,18 @@ export declare class Post {
   readonly updatedAt?: string;
   constructor(init: ModelInit<Post, PostMetaData>);
   static copyOf(source: Post, mutator: (draft: MutableModel<Post, PostMetaData>) => MutableModel<Post, PostMetaData> | void): Post;
+}
+
+export declare class Rating {
+  readonly id: string;
+  readonly name?: string;
+  readonly content: string;
+  readonly avgRating?: number;
+  readonly rating?: number;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Rating, RatingMetaData>);
+  static copyOf(source: Rating, mutator: (draft: MutableModel<Rating, RatingMetaData>) => MutableModel<Rating, RatingMetaData> | void): Rating;
 }
 
 export declare class Product {
