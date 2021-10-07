@@ -7,21 +7,21 @@ import { StyleSheet } from 'react-native';
         padding: 5
     },
     wrapper: {
-        // backgroundColor: '#eddddd',
+        borderBottomWidth: 1,
+        borderColor: 'pink',
+        borderWidth: 1,
+        backgroundColor: '#eddddd',
  
         width: 320,
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomWidth: 1,
-        borderColor: 'pink',
-        borderWidth: 1,
     },
     name: {
         fontSize: 14,
         fontWeight: 'bold',
         padding: 10,
-        color: 'black'
+        color: '#fb839f'
     },
     oldPriceContainer: {
         flexDirection: 'row',        
@@ -36,6 +36,7 @@ import { StyleSheet } from 'react-native';
         textDecorationLine: 'line-through',
     },
     contentCost:  {
+        color: 'black',
         fontSize: 13,
         fontWeight: 'bold',
     },

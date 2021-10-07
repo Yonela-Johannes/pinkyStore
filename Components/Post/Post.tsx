@@ -61,11 +61,10 @@ const Post = (props: PostProps) => {
     <View style={styles.rootContainer}>
         <View style={styles.postHeaderContainer}>
             <View style={styles.userDetailsContainer}>
-                <Text style={styles.username}>{feed.username ? 'feed.username' : 'Visitor'}</Text>
+                <Text style={styles.username}>{!feed.username ? 'Visitor' : feed.username}</Text>
                 <Image style={styles.userImage} source={require('../../img/logopinky.png')}/>
-                <Text style={styles.email}>{feed.email ? 'feed.email' : '@VisitorBePleasuredByPinky'}</Text>
+                <Text style={styles.email}>{!feed.email ? '@VisitorBePleasuredByPinky' : feed.email}</Text>
             </View>
-            <Text style={styles.headerTitle}>{feed.title}</Text>
             <Text style={{fontSize: 10, color:'gray'}}>{moment(feed.createdAt).fromNow()}</Text>
         </View>
         <View style={styles.postContainer}>

@@ -2,17 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {FontAwesome, AntDesign } from '@expo/vector-icons';
 
-const product = {
-    love: 100,
-    loveCount: 500
-}
-
-interface ratingCommentProps {
-    name: string;
-    content: string;
-    avgRating: number;
-    rating: number;
-}
 
 export default function RatingFeeds({post}) {
     console.log(post)
@@ -21,14 +10,14 @@ export default function RatingFeeds({post}) {
       <View style={styles.container}>
         <View style={styles.textContainer}>
             <Text style={styles.post}>{post.content}</Text>
-            <Text style={styles.name}>{post?.name}</Text>
+            <Text style={styles.name}>{!post.name ? 'Visitor': post.name}</Text>
             <View style={{marginBottom: 10, flexDirection: 'row', backgroundColor: '#f1f1f1', padding: 5, borderRadius: 5}}>
                         {[0,0,0,0,0].map((el, i) =>
                             <AntDesign
-                            key={`${product.id}-${i}`}
+                            key={`${post.id}-${i}`}
                             name={i < Math.floor(post.avgRating) ? 'heart': 'hearto'}
                             size={12}
-                            color="pink"
+                            color="#fc6185"
                             />
                             )
                         }
@@ -44,6 +33,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
+        backgroundColor: '#feaabe'
     },
     textContainer: {
         width: '100%',
@@ -56,13 +46,16 @@ const styles = StyleSheet.create({
 
     },
     loveCount :{
-        color: 'pink',
+        color: 'gray',
         fontSize: 10,
         paddingLeft: 5,
         fontWeight: 'bold',
     },
     post:{
-
+        color: '#f4436d',
+        fontSize: 13,
+        lineHeight: 18,
+        fontWeight: 'bold',
     },
     name: {
         color: 'gray',

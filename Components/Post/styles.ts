@@ -4,11 +4,19 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     rootContainer: {
         padding: 10,
+        margin: 10,
+        borderRadius: 5,
+        borderBottomWidth: 1,
+        borderColor: 'pink',
+
     },
     postHeaderContainer: {
+        backgroundColor: '#f2c7d1',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        borderRadius: 5,
+        padding: 8,
     },
     userDetailsContainer: {
         alignItems: 'flex-start',
