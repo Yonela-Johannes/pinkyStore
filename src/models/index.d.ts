@@ -12,10 +12,6 @@ type PostMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type LikeMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
 type ProductMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -35,7 +31,6 @@ type OrderMetaData = {
 export declare class User {
   readonly id: string;
   readonly username: string;
-  readonly name: string;
   readonly email: string;
   readonly image?: string;
   readonly posts?: (Post | null)[];
@@ -50,21 +45,10 @@ export declare class Post {
   readonly content: string;
   readonly image?: string;
   readonly user?: User;
-  readonly likes?: (Like | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Post, PostMetaData>);
   static copyOf(source: Post, mutator: (draft: MutableModel<Post, PostMetaData>) => MutableModel<Post, PostMetaData> | void): Post;
-}
-
-export declare class Like {
-  readonly id: string;
-  readonly user: User;
-  readonly post: Post;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Like, LikeMetaData>);
-  static copyOf(source: Like, mutator: (draft: MutableModel<Like, LikeMetaData>) => MutableModel<Like, LikeMetaData> | void): Like;
 }
 
 export declare class Product {
@@ -78,8 +62,6 @@ export declare class Product {
   readonly rating?: number;
   readonly price: number;
   readonly oldPrice?: number;
-  readonly love?: number;
-  readonly loveCount?: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product, ProductMetaData>);
@@ -90,7 +72,6 @@ export declare class CartProduct {
   readonly id: string;
   readonly userSub: string;
   readonly quantity: number;
-  readonly option?: string;
   readonly productID: string;
   readonly product?: Product;
   readonly createdAt?: string;
@@ -104,7 +85,6 @@ export declare class OrderProduct {
   readonly productID: string;
   readonly product?: Product;
   readonly quantity: number;
-  readonly option?: string;
   readonly orderID: string;
   readonly order?: Order;
   readonly createdAt?: string;
@@ -120,6 +100,7 @@ export declare class Order {
   readonly phoneNumber?: string;
   readonly city?: string;
   readonly address?: string;
+  readonly zipCode?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Order, OrderMetaData>);

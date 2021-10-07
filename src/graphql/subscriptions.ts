@@ -7,9 +7,13 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser {
       id
       username
-      name
       email
       image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -25,11 +29,6 @@ export const onCreateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -38,9 +37,13 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser {
       id
       username
-      name
       email
       image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -56,11 +59,6 @@ export const onUpdateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -69,9 +67,13 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser {
       id
       username
-      name
       email
       image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -87,11 +89,6 @@ export const onDeleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -102,41 +99,26 @@ export const onCreatePost = /* GraphQL */ `
       content
       image
       userID
-      user {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      likes {
-        items {
-          id
-          userID
-          postID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      user {
+        id
+        username
+        email
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        posts {
+          nextToken
+          startedAt
+        }
+      }
     }
   }
 `;
@@ -147,41 +129,26 @@ export const onUpdatePost = /* GraphQL */ `
       content
       image
       userID
-      user {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      likes {
-        items {
-          id
-          userID
-          postID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
+      user {
+        id
+        username
+        email
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        posts {
+          nextToken
+          startedAt
+        }
+      }
     }
   }
 `;
@@ -192,212 +159,26 @@ export const onDeletePost = /* GraphQL */ `
       content
       image
       userID
-      user {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      likes {
-        items {
-          id
-          userID
-          postID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
       _version
       _deleted
       _lastChangedAt
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateLike = /* GraphQL */ `
-  subscription OnCreateLike {
-    onCreateLike {
-      id
-      userID
-      postID
       user {
         id
         username
-        name
         email
         image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
         posts {
           nextToken
           startedAt
         }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
       }
-      post {
-        id
-        content
-        image
-        userID
-        user {
-          id
-          username
-          name
-          email
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        likes {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateLike = /* GraphQL */ `
-  subscription OnUpdateLike {
-    onUpdateLike {
-      id
-      userID
-      postID
-      user {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      post {
-        id
-        content
-        image
-        userID
-        user {
-          id
-          username
-          name
-          email
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        likes {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteLike = /* GraphQL */ `
-  subscription OnDeleteLike {
-    onDeleteLike {
-      id
-      userID
-      postID
-      user {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      post {
-        id
-        content
-        image
-        userID
-        user {
-          id
-          username
-          name
-          email
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        likes {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -414,8 +195,6 @@ export const onCreateProduct = /* GraphQL */ `
       rating
       price
       oldPrice
-      love
-      loveCount
       _version
       _deleted
       _lastChangedAt
@@ -437,8 +216,6 @@ export const onUpdateProduct = /* GraphQL */ `
       rating
       price
       oldPrice
-      love
-      loveCount
       _version
       _deleted
       _lastChangedAt
@@ -460,8 +237,6 @@ export const onDeleteProduct = /* GraphQL */ `
       rating
       price
       oldPrice
-      love
-      loveCount
       _version
       _deleted
       _lastChangedAt
@@ -476,7 +251,6 @@ export const onCreateCartProduct = /* GraphQL */ `
       id
       userSub
       quantity
-      option
       productID
       _version
       _deleted
@@ -494,8 +268,6 @@ export const onCreateCartProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -511,7 +283,6 @@ export const onUpdateCartProduct = /* GraphQL */ `
       id
       userSub
       quantity
-      option
       productID
       _version
       _deleted
@@ -529,8 +300,6 @@ export const onUpdateCartProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -546,7 +315,6 @@ export const onDeleteCartProduct = /* GraphQL */ `
       id
       userSub
       quantity
-      option
       productID
       _version
       _deleted
@@ -564,8 +332,6 @@ export const onDeleteCartProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -581,7 +347,6 @@ export const onCreateOrderProduct = /* GraphQL */ `
       id
       productID
       quantity
-      option
       orderID
       _version
       _deleted
@@ -599,8 +364,6 @@ export const onCreateOrderProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -614,6 +377,7 @@ export const onCreateOrderProduct = /* GraphQL */ `
         phoneNumber
         city
         address
+        zipCode
         _version
         _deleted
         _lastChangedAt
@@ -629,7 +393,6 @@ export const onUpdateOrderProduct = /* GraphQL */ `
       id
       productID
       quantity
-      option
       orderID
       _version
       _deleted
@@ -647,8 +410,6 @@ export const onUpdateOrderProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -662,6 +423,7 @@ export const onUpdateOrderProduct = /* GraphQL */ `
         phoneNumber
         city
         address
+        zipCode
         _version
         _deleted
         _lastChangedAt
@@ -677,7 +439,6 @@ export const onDeleteOrderProduct = /* GraphQL */ `
       id
       productID
       quantity
-      option
       orderID
       _version
       _deleted
@@ -695,8 +456,6 @@ export const onDeleteOrderProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -710,6 +469,7 @@ export const onDeleteOrderProduct = /* GraphQL */ `
         phoneNumber
         city
         address
+        zipCode
         _version
         _deleted
         _lastChangedAt
@@ -728,6 +488,7 @@ export const onCreateOrder = /* GraphQL */ `
       phoneNumber
       city
       address
+      zipCode
       _version
       _deleted
       _lastChangedAt
@@ -745,6 +506,7 @@ export const onUpdateOrder = /* GraphQL */ `
       phoneNumber
       city
       address
+      zipCode
       _version
       _deleted
       _lastChangedAt
@@ -762,6 +524,7 @@ export const onDeleteOrder = /* GraphQL */ `
       phoneNumber
       city
       address
+      zipCode
       _version
       _deleted
       _lastChangedAt

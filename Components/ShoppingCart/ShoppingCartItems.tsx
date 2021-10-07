@@ -11,15 +11,14 @@ interface CartProductItemsProps {
     cartItems: CartProduct;
 }
 function ShoppingCartItems({cartItem}: CartProductItemsProps) {
-    console.log("I am here.", cartItem)
-    const {product, ...cartProduct} = cartItem;
 
+    const {product, ...cartProduct} = cartItem;
 
     const updateQuantity = async (newQuantity: number) => {
         const original = await DataStore.query(CartProduct, cartProduct.id);
         await DataStore.save(
-            CartProduct.CopyOf(original, updated => {
-                updated.quatity = newQuantity;
+            CartProduct.copyOf(original, updated => {
+                updated.quantity = newQuantity;
             })
         )
     }

@@ -2,6 +2,63 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      username
+      email
+      image
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      posts {
+        items {
+          id
+          content
+          image
+          userID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        email
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        posts {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const syncUsers = /* GraphQL */ `
   query SyncUsers(
     $filter: ModelUserFilterInput
@@ -18,77 +75,81 @@ export const syncUsers = /* GraphQL */ `
       items {
         id
         username
-        name
         email
         image
-        posts {
-          nextToken
-          startedAt
-        }
         _version
         _deleted
         _lastChangedAt
         createdAt
         updatedAt
+        posts {
+          nextToken
+          startedAt
+        }
       }
       nextToken
       startedAt
     }
   }
 `;
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
+export const getPost = /* GraphQL */ `
+  query GetPost($id: ID!) {
+    getPost(id: $id) {
       id
-      username
-      name
-      email
+      content
       image
-      posts {
-        items {
+      userID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      user {
+        id
+        username
+        email
+        image
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        posts {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const listPosts = /* GraphQL */ `
+  query ListPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        content
+        image
+        userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        user {
           id
-          content
+          username
+          email
           image
-          userID
           _version
           _deleted
           _lastChangedAt
           createdAt
           updatedAt
         }
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -113,10 +174,14 @@ export const syncPosts = /* GraphQL */ `
         content
         image
         userID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
         user {
           id
           username
-          name
           email
           image
           _version
@@ -125,150 +190,6 @@ export const syncPosts = /* GraphQL */ `
           createdAt
           updatedAt
         }
-        likes {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
-      id
-      content
-      image
-      userID
-      user {
-        id
-        username
-        name
-        email
-        image
-        posts {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      likes {
-        items {
-          id
-          userID
-          postID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        content
-        image
-        userID
-        user {
-          id
-          username
-          name
-          email
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        likes {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncLikes = /* GraphQL */ `
-  query SyncLikes(
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncLikes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userID
-        postID
-        user {
-          id
-          username
-          name
-          email
-          image
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        post {
-          id
-          content
-          image
-          userID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
       }
       nextToken
       startedAt
@@ -288,8 +209,6 @@ export const getProduct = /* GraphQL */ `
       rating
       price
       oldPrice
-      love
-      loveCount
       _version
       _deleted
       _lastChangedAt
@@ -316,8 +235,6 @@ export const listProducts = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -353,8 +270,6 @@ export const syncProducts = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -372,7 +287,6 @@ export const getCartProduct = /* GraphQL */ `
       id
       userSub
       quantity
-      option
       productID
       _version
       _deleted
@@ -390,8 +304,6 @@ export const getCartProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -412,7 +324,6 @@ export const listCartProducts = /* GraphQL */ `
         id
         userSub
         quantity
-        option
         productID
         _version
         _deleted
@@ -430,8 +341,6 @@ export const listCartProducts = /* GraphQL */ `
           rating
           price
           oldPrice
-          love
-          loveCount
           _version
           _deleted
           _lastChangedAt
@@ -461,7 +370,6 @@ export const syncCartProducts = /* GraphQL */ `
         id
         userSub
         quantity
-        option
         productID
         _version
         _deleted
@@ -479,8 +387,6 @@ export const syncCartProducts = /* GraphQL */ `
           rating
           price
           oldPrice
-          love
-          loveCount
           _version
           _deleted
           _lastChangedAt
@@ -499,7 +405,6 @@ export const getOrderProduct = /* GraphQL */ `
       id
       productID
       quantity
-      option
       orderID
       _version
       _deleted
@@ -517,8 +422,6 @@ export const getOrderProduct = /* GraphQL */ `
         rating
         price
         oldPrice
-        love
-        loveCount
         _version
         _deleted
         _lastChangedAt
@@ -532,6 +435,7 @@ export const getOrderProduct = /* GraphQL */ `
         phoneNumber
         city
         address
+        zipCode
         _version
         _deleted
         _lastChangedAt
@@ -552,7 +456,6 @@ export const listOrderProducts = /* GraphQL */ `
         id
         productID
         quantity
-        option
         orderID
         _version
         _deleted
@@ -570,8 +473,6 @@ export const listOrderProducts = /* GraphQL */ `
           rating
           price
           oldPrice
-          love
-          loveCount
           _version
           _deleted
           _lastChangedAt
@@ -585,6 +486,7 @@ export const listOrderProducts = /* GraphQL */ `
           phoneNumber
           city
           address
+          zipCode
           _version
           _deleted
           _lastChangedAt
@@ -614,7 +516,6 @@ export const syncOrderProducts = /* GraphQL */ `
         id
         productID
         quantity
-        option
         orderID
         _version
         _deleted
@@ -632,8 +533,6 @@ export const syncOrderProducts = /* GraphQL */ `
           rating
           price
           oldPrice
-          love
-          loveCount
           _version
           _deleted
           _lastChangedAt
@@ -647,6 +546,7 @@ export const syncOrderProducts = /* GraphQL */ `
           phoneNumber
           city
           address
+          zipCode
           _version
           _deleted
           _lastChangedAt
@@ -668,6 +568,7 @@ export const getOrder = /* GraphQL */ `
       phoneNumber
       city
       address
+      zipCode
       _version
       _deleted
       _lastChangedAt
@@ -690,6 +591,7 @@ export const listOrders = /* GraphQL */ `
         phoneNumber
         city
         address
+        zipCode
         _version
         _deleted
         _lastChangedAt
@@ -721,6 +623,7 @@ export const syncOrders = /* GraphQL */ `
         phoneNumber
         city
         address
+        zipCode
         _version
         _deleted
         _lastChangedAt

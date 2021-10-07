@@ -1,32 +1,20 @@
 
-type User @model {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   username: String!
-  name: String!
   email: String!
   image: String
   posts: [Post] @connection(keyName: "byUser", fields: ["id"])
 }
 
-type Post @model @key(name: "byUser", fields: ["userID"]) {
+type Post @model @auth(rules: [{allow: public}])  @key(name: "byUser", fields: ["userID"]) {
   id: ID!
   content: String!
   image: String
   userID: ID!
   user: User @connection(fields: ["userID"])
-  likes: [Like] @connection(keyName: "byPost", fields: ["id"])
 }
 
-type Like 
-  @model(queries: null) 
-  @key(name: "byUser", fields: ["userID", "postID"]) 
-  @key(name: "byPost", fields: ["postID", "userID"]) {
-  id: ID!
-  userID: ID!
-  postID: ID!
-  user: User! @connection(fields: ["userID"])
-  post: Post! @connection(fields: ["postID"])
-  }
 
 type Product @model @auth(rules: [{allow: public}]) {
   id: ID!
@@ -39,28 +27,21 @@ type Product @model @auth(rules: [{allow: public}]) {
   rating: Int
   price: Float!
   oldPrice: Float
-  love: Float
-  loveCount: Int
-
 }
 
 type CartProduct @model @auth(rules: [{allow: public}]) {
   id: ID!
   userSub: String!
   quantity: Int!
-  option: String
-
   productID: ID!
   product: Product @connection(fields: ["productID"])
 }
 
 type OrderProduct @model @auth(rules: [{ allow: public }]){
   id: ID!
-
   productID: ID!
   product: Product @connection(fields: ["productID"])
   quantity: Int!
-  option: String
   orderID: ID!
   order: Order @connection(fields: ["orderID"])
 }
@@ -72,4 +53,5 @@ type Order @model @auth(rules: [{allow: public }]){
   phoneNumber: String
   city: String
   address: String
+  zipCode: String
 } 

@@ -11,46 +11,52 @@ export default function AddressScreen({navigation}) {
     const [address, setAddress] = useState('')
     const [apartment, setApartment] = useState('')
     const [city, setCity] = useState('')
+    const [zipCode, setZipCode] = useState('')
 
     const [phoneError, setPhoneError] = useState('')
-    // const [zipError, zipError] = useState('')
+    const [zipCodeError, setZipCodeError] = useState('')
 
     const validatePhone = () =>{
         if (phone.length < 9){
             setPhoneError('Phone number too short')
         }else if(phone.length > 10){
             setPhoneError('Phone number exceeded limit')
-        };
+        }else if(zipCode.length < 3){
+            setZipCodeError('postal code too short')
+        }else if(zipCode.length > 4){
+            setZipCodeError('postal code must be 4 digits')
+        }
+        ;
     }
 
-    // const saveOrder = async () => {
-    //     const userData = await Auth.currentAuthenticatedUser();
-    //     const newOrder = await DataStore.save(
-    //         new Order({
-    //             userSub: userData.attributes.sub,
-    //             fullname: fullname,
-    //             phoneNumber: phone,
-    //             city,
-    //             address,
-    //         })
-    //     )
-    //     const cartItems = await DataStore.query(CartProduct, cp => 
-    //         cp.userSub('eq', userData.attributes.sub),
+    const saveOrder = async () => {
+        const userData = await Auth.currentAuthenticatedUser();
+        const newOrder = await DataStore.save(
+            new Order({
+                userSub: userData.attributes.sub,
+                fullname: fullname,
+                phoneNumber: phone,
+                city,
+                address,
+                zipCode,
+            })
+        )
+        const cartItems = await DataStore.query(CartProduct, cp => 
+            cp.userSub('eq', userData.attributes.sub),
     
-    //     );
-    //     await Promise.all(
-    //         cartItems.map(cartItem => DataStore.save(new OrderProduct({
-    //             quantity: cartItem.quantity,
-    //             option: cartItem.option,
-    //             productID: cartItem.productID,
-    //             orderID: newOrder.id,
-    //         })))
-    //     )
-    //     await Promise.all(cartItems.map(cartItem => DataStore.delete(cartItem)));
-    //  };
-    console.log("before button click")
+        );
+        await Promise.all(
+            cartItems.map(cartItem => DataStore.save(new OrderProduct({
+                quantity: cartItem.quantity,
+                productID: cartItem.productID,
+                orderID: newOrder.id,
+            })))
+        )
+        await Promise.all(cartItems.map(cartItem => DataStore.delete(cartItem)));
+        console.log("Save order successfull")
+        navigation.navigate('Blog');
+     };
     const checkOut = () => {
-        console.log("Before nav")
         if(!fullname)
             Alert.alert('Please fill in your fullname')
         else if(!phone)
@@ -59,11 +65,10 @@ export default function AddressScreen({navigation}) {
             Alert.alert('Please fill in your address')
         else if(!city)
             Alert.alert('Please fill in your city')
-        else if(!zip)
-            Alert.alert('Please fill in your ZIP code')
+        else if(!zipCode)
+            Alert.alert('Please fill in your town postal code')
         else{
-            navigation.navigate('Blog')
-             console.log('After Navigation')
+            saveOrder();
         }
             return;
     }
@@ -91,17 +96,16 @@ export default function AddressScreen({navigation}) {
             <Text style={styles.label}>Address</Text>
             <TextInput style={styles.input} placeholder={'Street address or P.O Box'} value={address} onChangeText={setAddress} />
             <TextInput style={styles.input} placeholder={'Apartment, Unit...(Optional)'} value={apartment} onChangeText={setApartment} />
-            {/* {!!error && <Text style={styles.error}>{error}</Text>} */}
         </View>
         <View>
             <Text style={styles.label}>City</Text>
             <TextInput style={styles.input} value={city} onChangeText={setCity} />
         </View>
-        {/* <View>
+        <View>
             <Text style={styles.label}>ZIP Code</Text>
-            <TextInput keyboardType={'phone-pad'} style={styles.input} value={zip} onChangeText={(text) => setZip(text)} />
-            {!!error && <Text style={styles.error}>{error}</Text>}
-        </View> */}
+            <TextInput placeholder={'Town postal code'} keyboardType={'phone-pad'} style={styles.input} value={zipCode} onChangeText={(text) => setZipCode(text)} />
+            {!!zipCodeError && <Text style={styles.error}>{zipCodeError}</Text>}
+        </View>
         <View>
             <Text style={styles.delivery}>Delivery takes up to 2 weeks.</Text>
         </View>

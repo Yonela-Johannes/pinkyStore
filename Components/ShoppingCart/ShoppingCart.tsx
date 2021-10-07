@@ -12,14 +12,11 @@ export default function ShoppingCartComponent() {
   const [loading, setLoading] = useState(false)
   const [cartProducts, setCartProducts ] = useState<CartProduct[]>([])
 
-  useEffect(() => {
-
     const fetchCartProducts = async () => {
       const userData = await Auth.currentAuthenticatedUser();
-      DataStore.query(CartProduct, cp => cp.quantity('gt', 0)).then(
-      setCartProducts
-      );
+      DataStore.query(CartProduct, cp => cp.userSub('eq', userData.attributes.sub)).then(setCartProducts);
     };
+  useEffect(() => {
     fetchCartProducts();
   }, [])
 
@@ -46,6 +43,11 @@ export default function ShoppingCartComponent() {
   }, [cartProducts])
 
     useEffect(() => {
+      const subscription = DataStore.observe(CartProduct).subscribe(msg => fetchCartProducts())
+      return subscription.unsubscribe;
+    }, [])
+    
+    useEffect(() => {
       const subscriptions = cartProducts.map(cp => 
        DataStore.observe(CartProduct, cp.id).subscribe(msg => {
          if(msg.opType === 'UPDATE'){
@@ -63,7 +65,7 @@ export default function ShoppingCartComponent() {
     );
       return () => {
         subscriptions.forEach(sub => sub.unsubscribe());
-      }
+      };
     }, [cartProducts])
 
   const totalPrice = cartProducts.reduce(

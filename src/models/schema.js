@@ -17,13 +17,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
                 "email": {
                     "name": "email",
                     "isArray": false,
@@ -75,6 +68,22 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
                 }
             ]
         },
@@ -115,20 +124,6 @@ export const schema = {
                         "targetName": "userID"
                     }
                 },
-                "likes": {
-                    "name": "likes",
-                    "isArray": true,
-                    "type": {
-                        "model": "Like"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "post"
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -161,88 +156,20 @@ export const schema = {
                             "userID"
                         ]
                     }
-                }
-            ]
-        },
-        "Like": {
-            "name": "Like",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "user": {
-                    "name": "user",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userID"
-                    }
-                },
-                "post": {
-                    "name": "post",
-                    "isArray": false,
-                    "type": {
-                        "model": "Post"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "postID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Likes",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {
-                        "queries": null
-                    }
                 },
                 {
-                    "type": "key",
+                    "type": "auth",
                     "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID",
-                            "postID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPost",
-                        "fields": [
-                            "postID",
-                            "userID"
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
                         ]
                     }
                 }
@@ -323,20 +250,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "love": {
-                    "name": "love",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "loveCount": {
-                    "name": "loveCount",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -401,13 +314,6 @@ export const schema = {
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
-                    "attributes": []
-                },
-                "option": {
-                    "name": "option",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
                     "attributes": []
                 },
                 "productID": {
@@ -509,13 +415,6 @@ export const schema = {
                     "isArray": false,
                     "type": "Int",
                     "isRequired": true,
-                    "attributes": []
-                },
-                "option": {
-                    "name": "option",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
                     "attributes": []
                 },
                 "orderID": {
@@ -626,6 +525,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "zipCode": {
+                    "name": "zipCode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -671,5 +577,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "fb0d847840a33be54f06fb6eca59f532"
+    "version": "a7a1869069bc61f39fb65f4525662a1e"
 };
