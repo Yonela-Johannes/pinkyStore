@@ -31,20 +31,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "posts": {
-                    "name": "posts",
-                    "isArray": true,
-                    "type": {
-                        "model": "Post"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "user"
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -111,18 +97,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "user": {
-                    "name": "user",
+                "userID": {
+                    "name": "userID",
                     "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "userID"
-                    }
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -143,6 +123,88 @@ export const schema = {
             },
             "syncable": true,
             "pluralName": "Posts",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Question": {
+            "name": "Question",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "content": {
+                    "name": "content",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "image": {
+                    "name": "image",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Questions",
             "attributes": [
                 {
                     "type": "model",
@@ -288,24 +350,15 @@ export const schema = {
                 },
                 "images": {
                     "name": "images",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "String",
-                    "isRequired": true,
-                    "attributes": [],
-                    "isArrayNullable": false
-                },
-                "options": {
-                    "name": "options",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "avgRating": {
                     "name": "avgRating",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -326,7 +379,14 @@ export const schema = {
                 "oldPrice": {
                     "name": "oldPrice",
                     "isArray": false,
-                    "type": "Float",
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "inCart": {
+                    "name": "inCart",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -403,20 +463,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "product": {
-                    "name": "product",
-                    "isArray": false,
-                    "type": {
-                        "model": "Product"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "productID"
-                    }
-                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -476,20 +522,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "product": {
-                    "name": "product",
-                    "isArray": false,
-                    "type": {
-                        "model": "Product"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "productID"
-                    }
-                },
                 "quantity": {
                     "name": "quantity",
                     "isArray": false,
@@ -503,20 +535,6 @@ export const schema = {
                     "type": "ID",
                     "isRequired": true,
                     "attributes": []
-                },
-                "order": {
-                    "name": "order",
-                    "isArray": false,
-                    "type": {
-                        "model": "Order"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "orderID"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -657,5 +675,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "6d070198a4f18ab27ca44a6562955c2c"
+    "version": "301451aff01c7645a6596653fbbb1ddf"
 };

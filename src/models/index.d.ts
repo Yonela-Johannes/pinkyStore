@@ -12,6 +12,10 @@ type PostMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type QuestionMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type RatingMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -37,7 +41,6 @@ export declare class User {
   readonly username: string;
   readonly email: string;
   readonly image?: string;
-  readonly posts?: (Post | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);
@@ -48,11 +51,22 @@ export declare class Post {
   readonly id: string;
   readonly content: string;
   readonly image?: string;
-  readonly user?: User;
+  readonly userID: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Post, PostMetaData>);
   static copyOf(source: Post, mutator: (draft: MutableModel<Post, PostMetaData>) => MutableModel<Post, PostMetaData> | void): Post;
+}
+
+export declare class Question {
+  readonly id: string;
+  readonly content: string;
+  readonly image?: string;
+  readonly userID: string;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Question, QuestionMetaData>);
+  static copyOf(source: Question, mutator: (draft: MutableModel<Question, QuestionMetaData>) => MutableModel<Question, QuestionMetaData> | void): Question;
 }
 
 export declare class Rating {
@@ -72,12 +86,12 @@ export declare class Product {
   readonly name: string;
   readonly description?: string;
   readonly image: string;
-  readonly images: string[];
-  readonly options?: string[];
+  readonly images?: string;
   readonly avgRating?: number;
   readonly rating?: number;
   readonly price: number;
   readonly oldPrice?: number;
+  readonly inCart?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product, ProductMetaData>);
@@ -89,7 +103,6 @@ export declare class CartProduct {
   readonly userSub: string;
   readonly quantity: number;
   readonly productID: string;
-  readonly product?: Product;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<CartProduct, CartProductMetaData>);
@@ -99,10 +112,8 @@ export declare class CartProduct {
 export declare class OrderProduct {
   readonly id: string;
   readonly productID: string;
-  readonly product?: Product;
   readonly quantity: number;
   readonly orderID: string;
-  readonly order?: Order;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<OrderProduct, OrderProductMetaData>);

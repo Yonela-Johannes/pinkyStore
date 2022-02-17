@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-pinkystore-dev-02717-authRole",
-      "UnauthRoleArn": "arn:aws:iam::235812810512:role/amplify-pinkystore-dev-02717-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::235812810512:role/amplify-pinkystore-dev-02717-authRole",
+      "AuthRoleName": "amplify-pinkyshop-dev-02124-authRole",
+      "UnauthRoleArn": "arn:aws:iam::235812810512:role/amplify-pinkyshop-dev-02124-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::235812810512:role/amplify-pinkyshop-dev-02124-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-pinkystore-dev-02717-deployment",
-      "UnauthRoleName": "amplify-pinkystore-dev-02717-unauthRole",
-      "StackName": "amplify-pinkystore-dev-02717",
-      "StackId": "arn:aws:cloudformation:us-east-2:235812810512:stack/amplify-pinkystore-dev-02717/42b374b0-1bf4-11ec-9d61-0aced2a69edc",
-      "AmplifyAppId": "d258sjrjgie36o"
+      "DeploymentBucketName": "amplify-pinkyshop-dev-02124-deployment",
+      "UnauthRoleName": "amplify-pinkyshop-dev-02124-unauthRole",
+      "StackName": "amplify-pinkyshop-dev-02124",
+      "StackId": "arn:aws:cloudformation:us-east-2:235812810512:stack/amplify-pinkyshop-dev-02124/c0796a60-2baa-11ec-9ab9-0234feb05ba4",
+      "AmplifyAppId": "d16a0ypkm1cync"
     },
     "categories": {
       "auth": {
-        "pinkystore08f8704d": {}
+        "pinkyshopf4269796": {}
       }
     }
   }

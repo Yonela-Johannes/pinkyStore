@@ -1,12 +1,14 @@
 {
   "auth": {
-    "pinkystore08f8704d": {
+    "pinkyshopf4269796": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "loginMechanisms": [],
+        "loginMechanisms": [
+          "PREFERRED_USERNAME"
+        ],
         "signupAttributes": [
           "EMAIL"
         ],
@@ -25,7 +27,7 @@
     }
   },
   "api": {
-    "pinkystore": {
+    "pinkyshop": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -44,7 +46,7 @@
             {
               "authenticationType": "AMAZON_COGNITO_USER_POOLS",
               "userPoolConfig": {
-                "userPoolId": "authpinkystore08f8704d"
+                "userPoolId": "authpinkyshopf4269796"
               }
             }
           ]
@@ -53,7 +55,7 @@
     }
   },
   "storage": {
-    "PinkyStore": {
+    "pinkyshop": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
     }

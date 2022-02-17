@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "pinkystore08f8704d_identitypool_08f8704d",
+    "identityPoolName": "pinkyshopf4269796_identitypool_f4269796",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "pinkys08f8704d",
-    "userPoolName": "pinkystore08f8704d_userpool_08f8704d",
+    "resourceNameTruncated": "pinkysf4269796",
+    "userPoolName": "pinkyshopf4269796_userpool_f4269796",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -29,10 +29,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "pinkys08f8704d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "pinkysf4269796_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "08f8704d",
-    "resourceName": "pinkystore08f8704d",
+    "sharedId": "f4269796",
+    "resourceName": "pinkyshopf4269796",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -47,8 +47,14 @@
         ]
     },
     "useDefault": "default",
+    "triggers": "{}",
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "breakCircularDependency": true,
+    "permissions": [],
     "dependsOn": []
 }

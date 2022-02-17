@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native'
 import styles from './styles'
 
 
-LogBox.ignoreLogs(['Setting a timer']);
+// LogBox.ignoreLogs(['Setting a timer']);
 
 interface CategoriesProps {
     product: {
